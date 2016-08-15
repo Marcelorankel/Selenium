@@ -1,0 +1,37 @@
+using OpenQA.Selenium;
+using OpenQA.Selenium.IE;
+using System.IO;
+
+namespace Selenium
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            try
+            {
+                //Instancia DRIVER do IE x64
+                IWebDriver driver = new InternetExplorerDriver(@"C:\Users\Barba\Desktop\Kleber");
+                //Navega Até Pagina do google
+                driver.Navigate().GoToUrl("http://www.google.com.br");
+                //Maximiza Janela IE
+                driver.Manage().Window.Maximize();
+
+                //Copia Texto id = _eEe
+                string text = driver.FindElement(By.Id("_eEe")).Text;
+                //Cria Arquivo TXT
+                FileStream fs = new FileStream("d:\\Kleber.txt", FileMode.CreateNew, FileAccess.Write);
+                StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.ASCII);
+                //Insere TEXTO
+                sw.Write(text);
+
+                //Fecha OBJTS
+                sw.Close();
+                fs.Close();
+            }
+            catch
+            {
+            }        
+        }
+    }  
+}
